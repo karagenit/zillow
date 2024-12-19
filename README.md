@@ -25,3 +25,7 @@ On page two, it's a Fetch/XHR named `async-create-search-page-state` that's just
 Not sure where the 727 number comes from. There are 182 in my array and summing the room availability is 666. 
 
 Adding filter for "apartment community" and keeping same filters. isBuilding flag appears to do nothing since it's alwasy true. Gonna have to do a diff to filter this out. Says 627 for this filter.
+
+## Walkscore
+
+F this company. Signup system forces you to enter a website and doesn't accept mine. And then didn't even 

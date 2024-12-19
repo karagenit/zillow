@@ -42,8 +42,10 @@ indie_apts = all_apts.reject { |apt| complex_apts.any? { |complex| complex["id"]
 require 'csv'
 
 CSV.open('output.csv', 'w') do |csv|
-  csv << ['detailUrl', 'address', 'unformattedPrice', 'beds', 'baths', 'area']  # Header row
+  csv << ['detailUrl', 'address', 'unformattedPrice', 'beds', 'baths', 'area', 'latitude', 'longitude']  # Header row
   indie_apts.each do |apt|
-    csv << [apt['detailUrl'], apt['address'], apt['unformattedPrice'], apt['beds'], apt['baths'], apt['area']]
-  end
+      if apt['detailUrl'] && apt['address'] && apt['unformattedPrice'] && apt['beds'] && apt['baths'] && apt['area'] && apt['latLong'] && apt['latLong']['latitude'] && apt['latLong']['longitude']
+        csv << [apt['detailUrl'], apt['address'], apt['unformattedPrice'], apt['beds'], apt['baths'], apt['area'], apt['latLong']['latitude'], apt['latLong']['longitude']]
+      end
+    end
 end
