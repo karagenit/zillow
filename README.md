@@ -21,3 +21,7 @@ Says 727 available.
 Inspect element. Main page response. Has a really huge page w/ some json payloads. "cat1" -> "searchResults" -> "listResults"
 
 On page two, it's a Fetch/XHR named `async-create-search-page-state` that's just straight up JSON. has a little extra info but I think we cna still use the same parser logic.
+
+Not sure where the 727 number comes from. There are 182 in my array and summing the room availability is 666. 
+
+Adding filter for "apartment community" and keeping same filters. isBuilding flag appears to do nothing since it's alwasy true. Gonna have to do a diff to filter this out.

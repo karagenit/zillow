@@ -35,6 +35,13 @@ end
 
 puts apartments.size
 
-apartments.each do |result|
-  puts result["address"]
-end
+# apartments.each do |result|
+#   puts result["address"]
+# end
+
+
+non_buildings = apartments.count { |apt| apt["isBuilding"] == false }
+puts "Number of non-building apartments: #{non_buildings}"
+
+total_availability = apartments.sum { |apt| apt["availabilityCount"].to_i }
+puts "Total availability count: #{total_availability}"
