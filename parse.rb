@@ -17,17 +17,19 @@ def parse_apartments(dirname)
                 bracket_count -= 1
             end
         end
-        list_results = response1[start_pos..scanner.pos-1]
+        end_pos = scanner.pos
+        # sometimes we land a few chars past idk why
+        end_pos -=1 while response1[end_pos] != ']'
+        list_results = response1[start_pos..end_pos]
         list_results.strip!
-        list_results.chop! if list_results.end_with?(',')
         list_results = "{#{list_results}}"
         begin
             parsed_results = JSON.parse(list_results)
             apartments.concat(parsed_results["listResults"])
         rescue JSON::ParserError => e
-            puts "Failed to parse JSON"
+            puts "Failed to parse JSON in #{file}"
             puts "Start: '#{list_results[0..100]}'"
-            puts "End: '#{list_results[-1000..-1]}'"
+            puts "End: '#{list_results[-100..-1]}'"
             puts list_results.size
             exit
         end
@@ -35,8 +37,8 @@ def parse_apartments(dirname)
     apartments
 end
 
-all_apts = parse_apartments('allResults')
-complex_apts = parse_apartments('aptComplexes')
+all_apts = parse_apartments('allResults-alexandria')
+complex_apts = parse_apartments('aptComplexes-alexandria')
 indie_apts = all_apts.reject { |apt| complex_apts.any? { |complex| complex["id"] == apt["id"] } }
 
 require 'csv'
